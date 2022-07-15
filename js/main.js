@@ -22,9 +22,11 @@ const contenido = document.querySelector('#contenido');
 const logout = document.querySelector('#logout');
 const modal1 = document.querySelector('#modal1');
 const modal2 = document.querySelector('#modal2');
+const alertMenorEdad = document.querySelector('#alertMenorEdad');
 const modal = document.querySelector('#modal');
 const btnContinuar = document.querySelector('#btnContinuar');
 const ok = document.querySelector('#ok');
+const btnCerrar = document.querySelector('#btnCerrar');
 
 
 
@@ -34,7 +36,7 @@ modal.style.display = 'none';
 const ocultarFormulario = () => {
  modal.style.display = 'none';
  modal1.style.display = 'none';
-  contenido.innerHTML = `Hola  ${nombreUsuario}  ${apellidoUsuario}, tienes  ${edadUsuario}  años.`;
+  contenido.innerHTML = `<div>NOMBRE: ${nombreUsuario}</div><div>APELLIDO: ${apellidoUsuario}</div><div>EDAD: ${edadUsuario}  años.</div>`;
 }
 
 
@@ -52,11 +54,11 @@ formulario.addEventListener('submit', (e) => {
 
   
   if (edad.value > 2004){
-   alert(`No puedes ingresar al sitio, eres menor de edad`)
+    alertMenorEdad.style.display = 'flex';
+    modal.style.display = 'none';
     localStorage.setItem('esMayorEdad', false);
     localStorage.clear;
     sessionStorage.clear;
-    modal.style.display = '';
   }
   if (edad.value <= 2004){
     localStorage.setItem('nombreUsuario', nombre.value);
@@ -67,7 +69,10 @@ formulario.addEventListener('submit', (e) => {
   }
 })
 
-
+btnCerrar.onclick = () => {
+  alertMenorEdad.style.display = 'none';
+  modal.style.display = 'flex';
+};
 
 if (!!nombreUsuario && !!apellidoUsuario && !!edadUsuario) {
   ocultarFormulario();

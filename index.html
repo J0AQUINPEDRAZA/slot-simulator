@@ -17,7 +17,7 @@
 <body>
     <header class="header">
         <div class="headerContainer">
-            <p class="espacio">.</p>
+            <div id="contenido"></div>
             <h1 class="title">SLOTS<span></span> Crazy emojis 🤑</h1>
             <form action="">
                 <button id="logout" type="submit" class="botones" title="logout" name="logout">Log out</button>
@@ -28,7 +28,6 @@
     <main>
         <section class="section">
             <div class="article">
-                <div id="contenido"></div>
                 <div class="contentBox">
                     <div class="inventario__canjear">
                         <button type="button" id="btnCanjear" class="btnCanjear">Canjear</button>
@@ -116,6 +115,13 @@
             <div class="modalContainer modalContainer2">
                 <h2 class="chauTitle">Hasta la proxima</h2>
                 <button value="enviar" type="button" class="botonContinuar" id="ok">continuar</button>
+                </div>    
+            </div>
+        </div>
+        <div class="alertMenorEdad" id="alertMenorEdad"> 
+            <div class="modalContainer modalContainer2">
+                <h2 class="menorEdadTitle">No puedes ingresar al sitio eres menor de edad</h2>
+                <button value="enviar" type="button" class="botonContinuar" id="btnCerrar">Cerrar</button>
                 </div>    
             </div>
         </div>

@@ -15,18 +15,16 @@
 }
 
 .section{
-    margin-left: -110px;
+    margin-left: -136px;
 }
 
 .title{
-    width: 100%;
    /*font-family: 'Neonderthaw', cursive;*/
    font-family: 'Caveat', cursive;
    /*font-family: 'Indie Flower', cursive;*/
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
     color: #fff;
     font-size: 40px;
     margin-top: 18px;
@@ -48,16 +46,10 @@
     flex-direction: row;
     justify-content: space-around;
 }
-.espacio{
-    margin-left: 143px;
-    color: transparent;
-}
 
 .botones{
     border: 1px transparent;
     background: transparent;
-    margin-right: 20px;
-    width: 300px;
     color: #fff;
     width: 125px;
     height: 20px;
@@ -412,6 +404,12 @@ input{
     font-size: 40px;
 }
 
+.menorEdadTitle{
+    text-shadow: 0 0 7px #1d1d1d;
+    font-size: 40px;
+    text-align: center;
+}
+
 
 .modalContainer{
     background: #fff;
@@ -504,6 +502,19 @@ input{
     z-index: 1;
     background: rgba(119, 119, 119, 0.84);
 } 
+.alertMenorEdad{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 105%;
+    z-index: 100;
+    justify-content: center;
+    align-items: center; 
+    overflow: hidden;
+    z-index: 1;
+    background: rgba(119, 119, 119, 0.84);
+} 
+
 
 .modal3{
     display: none;
@@ -560,8 +571,15 @@ input{
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    box-shadow: 0px 7px 20px #bda9a9;
 
 }
+
+.card:hover{
+    box-shadow: 0px 7px 20px #757272;
+    transition: 0.4s;
+}
+
 
 .inventario__canjear{
     display: flex;
