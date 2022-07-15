@@ -36,12 +36,14 @@ modal.style.display = 'none';
 const ocultarFormulario = () => {
  modal.style.display = 'none';
  modal1.style.display = 'none';
+ alertMenorEdad.style.display = 'none';
   contenido.innerHTML = `<div>NOMBRE: ${nombreUsuario}</div><div>APELLIDO: ${apellidoUsuario}</div><div>EDAD: ${edadUsuario}  años.</div>`;
 }
 
 
 btnContinuar.onclick = (e) => {
   e.preventDefault();
+  alertMenorEdad.style.display = 'none';
   modal.style.display = 'flex';
   modal1.style.display = 'none';
 };
