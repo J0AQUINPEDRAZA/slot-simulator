@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <div class="headerContainer">
+            <p class="espacio">.</p>
+            <h1 class="title">SLOTS<span></span> Crazy emojis 🤑</h1>
+            <form action="">
+                <button id="logout" type="submit" class="botones" title="logout" name="logout">Log out</button>
+            </form>
+        </div>
+        <span class="borde"></span>
+    </header>
+    <main>
+        <section class="section">
+            <div class="article">
+                <div id="contenido"></div>
+                <div class="contentBox">
+                    <div class="inventario__canjear">
+                        <button type="button" id="btnCanjear" class="btnCanjear">Canjear</button>
+                        <button type="button" id="btnInventario" class="btnInventario">Inventario</button>
+                        <button type="button" id="btnRecarga" class="btnRecarga">Recargar saldo</button>
+                    </div>
+                    <div class="containerBox">
+                        <div class="container">
+                            <div class="boxContainer">
+                                <div class="emojiContainer" id="emojiContainer">
+                                    <h2 class="emoji1 emoji" id="casilla3"></h2>
+                                    <h2 class="emoji2 emoji" id="casilla6"></h2>
+                                    <h2 class="emoji3 emoji" id="casilla9"></h2>
+                                    <h2 class="emoji4 emoji" id="casilla2"></h2>
+                                    <h2 class="emoji5 emoji" id="casilla5"></h2>
+                                    <h2 class="emoji6 emoji" id="casilla8"></h2>
+                                    <h2 class="emoji7 emoji" id="casilla1"></h2>
+                                    <h2 class="emoji8 emoji" id="casilla4"></h2>
+                                    <h2 class="emoji9 emoji" id="casilla7"></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inputs">
+                            <div class="divSaldo">
+                                <p class="titleSaldo">SALDO</p>
+                                <p id="saldo" class="numeroSaldo"></p>
+                            </div>
+                            <form id="containerTirada" class="containerTirada">
+                                <div class="caja" >
+                                    <label for="tirada" class="labelTirada">MONTO POR TIRADA</label>
+                                    <select id="tirada" type="option" class="tirada" required>
+                                        <option value="5">05</option>
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                    </select> 
+                                </div>
+                                <button id="jugar" type="submit" class="botonJugar" title="JUGAR" name="JUGAR">JUGAR</button> 
+                            </form>
+                        </div>
+                        <div id="txt" class="txt">
+                            <p>⚠️Te has quedado sin SALDO⚠️</p>
+                        </div>
+                        <form action="">
+                            <button id="salir" type="button" class="botonSalir" title="SALIR" name="SALIR" placeholder="salir">SALIR</button>
+                        </form>
+                    </div>
+                        <div class="popUp__premioX2" id="popUp__boxX2">
+                            <p id="premio" class="premio">
+                                X2
+                            </p>
+                        </div>
+                        <div class="popUp__premioX4" id="popUp__boxX4">
+                            <p id="premio" class="premio">
+                                X4
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </main>
+        <div class="modal" id="modal"> 
+            <div class="modalContainer">
+                <div id="contFormulario">
+                    <h1>Ingresa tus datos para comenzar</h1>
+                    <form id="formulario" action="">
+                        <input id="nombre" type="text" placeholder="Nombre" minlength="3" required maxlength="10" required pattern="[A-Z a-z]{1,15}" required>
+                        <input id="apellido" type="text" placeholder="Apellido" minlength="3" required maxlength="10" required pattern="[A-Z a-z]{1,15}" required>
+                        <input id="edad" type="number" placeholder="Año de nacimiento"  required>
+                        <button value="enviar" type="submit" class="botonIngresar">Log in</button>
+                    </form>
+                </div>    
+            </div>
+        </div>
+        <div class="modal1" id="modal1"> 
+            <div class="modalContainer modalContainer1">
+                <h2 class="bnvTitle">BIENVENIDO</h2>
+                <h3 class="bnvTitle">Crazy emojis</h3>
+                <p class="p">Crazy emojis es un juego tipo slot o comunmente llamado tragamoneda, consiste en conseguir una o mas filas columnas o diagonales con 3 emojis consecutivos de "dinero" 🤑, por cada fila columna o diagonal que cumpla esta condicion el usuario recibira una recompensa del doble del valor jugado (el monto de la tirada). El saldo podrá ser intercambiado por regalos, o retirado en forma de dinero.</p>
+                <button value="enviar" type="button" class="botonContinuar" id="btnContinuar">continuar</button>
+                </div>    
+            </div>
+        </div>
+        <div class="modal2" id="modal2"> 
+            <div class="modalContainer modalContainer2">
+                <h2 class="chauTitle">Hasta la proxima</h2>
+                <button value="enviar" type="button" class="botonContinuar" id="ok">continuar</button>
+                </div>    
+            </div>
+        </div>
+        <div class="modal3" id="modal3"> 
+            <div class="premiosContainer" id="premiosContainer">
+                <div class="skins" id="skins">
+                </div>
+                <button value="enviar" type="button" class="btnCerrarCanjear" id="btnCerrarCanjear">salir</button>   
+            </div>
+        </div>
+        <script src="js/main.js"></script>
+</body>
+</html>
