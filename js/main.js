@@ -32,6 +32,7 @@ const btnCerrar = document.querySelector('#btnCerrar');
 
 
 modal.style.display = 'none';
+alertMenorEdad.style.display = 'none';
 
 const ocultarFormulario = () => {
  modal.style.display = 'none';
