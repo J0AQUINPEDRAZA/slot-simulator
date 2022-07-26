@@ -1,48 +1,57 @@
 [
-    {
+    {  
+        "id": 1,
         "img": "imgs/awp.png",
-        "name": "Awp Gungnir",
-        "price": 30000
+        "nombre": "Awp Gungnir",
+        "price": 3000
 
     },
     {
+        "id": 2,
         "img": "imgs/glove_sport.png",
-        "name": "Guantes deportivos",
-        "price": 5000
+        "nombre": "Guantes deportivos",
+        "price": 2000
     },
     {
+        "id": 3,
         "img": "imgs/knife_karambit.png",
-        "name": "Karambit tigger tooth",
-        "price": 17000
+        "nombre": "Karambit tigger tooth",
+        "price": 1500
     },
     {
+        "id": 4,
         "img": "imgs/lp_ak.png",
-        "name": "AK47 bosque boreal",
-        "price": 14000
+        "nombre": "AK47 bosque boreal",
+        "price": 1300
     },
     {
+        "id": 5,
         "img": "imgs/sticker.png",
-        "name": "skull sticker",
-        "price": 6000
+        "nombre": "skull sticker",
+        "price": 1700
     },
     {
+        "id": 6,
         "img": "imgs/mag7.png",
-        "name": "Mag7 radioactive",
-        "price": 3000
+        "nombre": "Mag7 radioactive",
+        "price": 700
     },
     {
+        "id": 7,
         "img": "imgs/lp_knife.png",
-        "name": "Karambit fade",
-        "price": 20000
+        "nombre": "Karambit fade",
+        "price": 2100
     },
     {
+        "id": 8,
         "img": "imgs/usp_silencer.png",
-        "name": "Usp kill confirmed",
-        "price": 7000
+        "nombre": "Usp kill confirmed",
+        "price": 1200
     },
     {
+        "id": 9,
         "img": "imgs/p90.png",
-        "name": "P90 dead by Kitty",
-        "price": 5000
+        "nombre": "P90 dead by Kitty",
+        "price": 900
     }
 ]

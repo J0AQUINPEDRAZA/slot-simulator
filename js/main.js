@@ -1,9 +1,6 @@
-const YEAR = 2022;
 
 
-
-///////////////////////////LO IN - LOG OUT - VENTANAS EMERGENTES - LOCAL & SESsION STORAGE/////////////////////////////////
-
+//variables 
 let nombreUsuario = localStorage.getItem('nombreUsuario');
 let apellidoUsuario = localStorage.getItem('apellidoUsuario');
 let edadUsuario = localStorage.getItem('edadUsuario');
@@ -11,110 +8,14 @@ let saldoGuardado = localStorage.getItem('saldoGuardado');
 let saldoSession = sessionStorage.getItem('saldoSession');
 let inputNombre = sessionStorage.getItem('inputNombre');
 let inputApellido = sessionStorage.getItem('inputApellido');
-
-
-const formulario = document.querySelector('#formulario');
-const nombre = document.querySelector('#nombre');
-const apellido = document.querySelector('#apellido');
-const edad = document.querySelector('#edad');
-const contFormulario = document.querySelector('#contFormulario');
-const contenido = document.querySelector('#contenido');
-const logout = document.querySelector('#logout');
-const modal1 = document.querySelector('#modal1');
-const modal2 = document.querySelector('#modal2');
-const alertMenorEdad = document.querySelector('#alertMenorEdad');
-const modal = document.querySelector('#modal');
-const btnContinuar = document.querySelector('#btnContinuar');
-const ok = document.querySelector('#ok');
-const btnCerrar = document.querySelector('#btnCerrar');
-
-
-
-
-modal.style.display = 'none';
-alertMenorEdad.style.display = 'none';
-
-const ocultarFormulario = () => {
- modal.style.display = 'none';
- modal1.style.display = 'none';
- alertMenorEdad.style.display = 'none';
-  contenido.innerHTML = `<div>NOMBRE: ${nombreUsuario}</div><div>APELLIDO: ${apellidoUsuario}</div><div>EDAD: ${edadUsuario}  años.</div>`;
-}
-
-
-btnContinuar.onclick = (e) => {
-  e.preventDefault();
-  alertMenorEdad.style.display = 'none';
-  modal.style.display = 'flex';
-  modal1.style.display = 'none';
-};
-
-formulario.addEventListener('submit', (e) => {
-  e.preventDefault();
-  nombreUsuario = nombre.value;
-  apellidoUsuario = apellido.value;
-  edadUsuario = YEAR - edad.value;
-
-  
-  if (edad.value > 2004){
-    alertMenorEdad.style.display = 'flex';
-    modal.style.display = 'none';
-    localStorage.setItem('esMayorEdad', false);
-    localStorage.clear;
-    sessionStorage.clear;
-  }
-  if (edad.value <= 2004){
-    localStorage.setItem('nombreUsuario', nombre.value);
-    localStorage.setItem('apellidoUsuario', apellido.value);
-    localStorage.setItem('edadUsuario',  YEAR - edad.value);
-    localStorage.setItem('esMayorEdad', true);
-    ocultarFormulario();
-  }
-})
-
-btnCerrar.onclick = () => {
-  alertMenorEdad.style.display = 'none';
-  modal.style.display = 'flex';
-};
-
-if (!!nombreUsuario && !!apellidoUsuario && !!edadUsuario) {
-  ocultarFormulario();
-  
-}
-
-console.log(inputNombre, inputApellido);
-
-nombre.value = inputNombre;
-apellido.value = inputApellido;
-
-nombre.addEventListener('input', (e) => {
-  sessionStorage.setItem('inputNombre', e.target.value);
-})
-
-apellido.addEventListener('input', (e) => {
-  sessionStorage.setItem('inputApellido', e.target.value);
-})
-
-logout.onclick = () => {
-  sessionStorage.clear();
-  localStorage.clear();
-  localStorage.removeItem('nombreUsuario');
-  localStorage.removeItem('apellidoUsuario');
-  localStorage.removeItem('edadUsuario');
-  localStorage.removeItem('esMayorEdad');
-
-}
-
-
-
-
-/////////////////////////////////JUEGO/////////////////////////////////////////
-
-
+let jugadasSession = sessionStorage.getItem('jugadasSession');
+let jugadasGuardadas = sessionStorage.getItem('jugadasGuardadas');
+let inventarioGuardado = localStorage.getItem('inventario');
 let saldoInicial = 1000;
-
+let jugadas = 1;
 let tirada = document.getElementById('tirada');
 let saldo = document.getElementById('saldo');
+let recarga = document.getElementById('recargaSaldo');
 let child1 = document.getElementById('casilla1');
 let child2 = document.getElementById('casilla2');
 let child3 = document.getElementById('casilla3');
@@ -124,374 +25,564 @@ let child6 = document.getElementById('casilla6');
 let child7 = document.getElementById('casilla7');
 let child8 = document.getElementById('casilla8');
 let child9 = document.getElementById('casilla9');
+
+//constantes
+const formulario = document.querySelector('#formulario');
+const nombre = document.querySelector('#nombre');
+const apellido = document.querySelector('#apellido');
+const edad = document.querySelector('#edad');
+const contFormulario = document.querySelector('#contFormulario');
+const contenido = document.querySelector('#contenido');
+const logout = document.querySelector('#logout');
+const modal1 = document.querySelector('#modal1');
+const modal2 = document.querySelector('#modal2');
+const modalRecarga = document.querySelector('#modalRecarga');
+const modalInventario = document.querySelector('#modalInventario');
+const alertMenorEdad = document.querySelector('#alertMenorEdad');
+const modal = document.querySelector('#modal');
+const btnContinuar = document.querySelector('#btnContinuar');
+const no = document.querySelector('#no');
+const btnCerrar = document.querySelector('#btnCerrar');
+const recargar = document.querySelector('#recargar');
+const containerTirada = document.getElementById('containerTirada');
+const modalCanjear = document.getElementById('modalCanjear');
+const btnCanjear = document.querySelector('#btnCanjear');
+const btnCerrarCanjear = document.querySelector('#btnCerrarCanjear');
+const mandarInventario = document.querySelector('#mandarInventario');
+const cerrarRecarga = document.querySelector('#btnCerrarRecarga');
+const btnInventario = document.querySelector('#btnInventario');
+const btnCerrarInventario = document.querySelector('#btnCerrarInventario');
+const skins = document.getElementById('skins');
+const inventario = document.getElementById('inventario');
 const submit = document.getElementById('jugar');
 const salir = document.getElementById('salir');
 const chau = document.getElementById('chau');
+const YEAR = 2022;
+const mayorDeEdad = 18;
+
+//ARRAY DEL INVENTARIO DEL LOCALSTORAGE
+const canasta = canastaGuardada = JSON.parse(localStorage.getItem("canastaGuardada")) ?? [];
+
+//ARRAY CON LOS EMOJIS
+let demoArray = [`&#128520`, `&#128520`, `&#128520`, `&#128520`, `&#128520`, `&#128520`, `&#128520`, `&#128520`, `&#128520`,
+  `&#128526`, `&#128526`, `&#128526`, `&#128526`, `&#128526`, `&#128526`, `&#128526`, `&#128526`, `&#128526`,
+  `&#129297`, `&#129297`, `&#129297`, `&#129297`, `&#129297`, `&#129297`, `&#129297`, `&#129297`, `&#129297`];
+
+///////////////////////////LO IN - LOG OUT - VENTANAS EMERGENTES - LOCAL & SESsION STORAGE/////////////////////////////////
+
+//FUNCION DE OCULTAR EL FORMULARIO DE LOGIN Y IMPRIMIR LOS DATOS EN EL HTML
+const ocultarFormulario = () => {
+  modal.style.display = 'none';
+  modal1.style.display = 'none';
+  alertMenorEdad.style.display = 'none';
+  contenido.innerHTML = `<div>NOMBRE: ${nombreUsuario}</div><div>APELLIDO: ${apellidoUsuario}</div><div>EDAD: ${edadUsuario}  años.</div>`;
+}
+
+//EVENTO BOTON CONTINUAR DE LA VENTANA DE BIENVENIDA
+btnContinuar.onclick = (e) => {
+  e.preventDefault();
+  alertMenorEdad.style.display = 'none';
+  modal.style.display = 'flex';
+  modal1.style.display = 'none';
+};
+
+//FORMULARIO DE LOG IN - AGREGAR LOS DATOS AL LOCAL STORAGE
+formulario.addEventListener('submit', (e) => {
+  e.preventDefault();
+  nombreUsuario = nombre.value;
+  apellidoUsuario = apellido.value;
+  edadUsuario = YEAR - edad.value;
+
+//VALIDACION DE EDAD
+  if (edadUsuario < mayorDeEdad) {
+    alertMenorEdad.style.display = 'flex';
+    modal.style.display = 'none';
+    localStorage.setItem('esMayorEdad', edadUsuario < mayorDeEdad == false);
+    localStorage.clear;
+    sessionStorage.clear;
+  }
+  if (edadUsuario >= mayorDeEdad) {
+    localStorage.setItem('nombreUsuario', nombre.value);
+    localStorage.setItem('apellidoUsuario', apellido.value);
+    localStorage.setItem('edadUsuario', edadUsuario);
+    localStorage.setItem('esMayorEdad',  edadUsuario >= mayorDeEdad == true);
+    localStorage.setItem('canastaGuardada', JSON.stringify(canasta));;
+    ocultarFormulario();
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'LogIn coreccto',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+})
+//EVENTO BOTON CERRAR VENTANA DE ALERTA MENOR DE EDAD Y VOLVER A LA VENTANA ANTERIOR
+btnCerrar.onclick = () => {
+  alertMenorEdad.style.display = 'none';
+  modal.style.display = 'flex';
+};
+
+//VALIDACION PARA OCULTAR FORMULARIO DE LOGIN
+if (!!nombreUsuario && !!apellidoUsuario && !!edadUsuario) {
+  ocultarFormulario();
+}
+
+//EVENTOS PARA RECIBIR LOS DATOS DEL LOGIN Y MANDARLOS AL LOCAL STORAGE
+nombre.value = inputNombre;
+apellido.value = inputApellido;
+nombre.addEventListener('input', (e) => {
+  sessionStorage.setItem('inputNombre', e.target.value);
+})
+apellido.addEventListener('input', (e) => {
+  sessionStorage.setItem('inputApellido', e.target.value);
+})
+
+//EVENTO PARA DESLOGEAR - LOG OUT
+logout.onclick = () => {
+  modal2.style.display = 'flex';
+}
+//BOTON SALIR DEL LOG OUT
+salir.onclick = () => {
+  sessionStorage.clear();
+  localStorage.clear();
+  modal2.style.display = 'none';
+};
+
+//BOTON DE NO CERRAR SALIR
+no.onclick = () => {
+  modal2.style.display = 'none';
+};
+
+
+/////////////////////////////////JUEGO/////////////////////////////////////////
 
 saldo.innerHTML = saldoInicial;
 
-if(!!saldoSession){
-  saldo.innerHTML = saldoSession;
+if (saldoGuardado) {
+  saldo.innerHTML = saldoGuardado;
 }
 
+//RESTAR SALDO POR CADA PATRON PERDEDOR
 
+let restarSaldo = () => {
+  saldo.innerHTML = Number(saldo.innerHTML) - Number(tirada.value);
+  if (saldo.innerHTML <= 0) {
+    saldo.innerHTML = 0;
+  }
+}
 
+// --- PREMIOS --- MULTIPLICAR TIRADA Y SUMARLO AL SALDO POR CADA PATRON GANADOR
 
-let restarSaldo = () =>{
-    saldo.innerHTML = Number(saldo.innerHTML) - Number(tirada.value);
+let premioX2 = () => {
+  saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value * 2);
+}
+let premioX4 = () => {
+  saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value * 4);
+}
+let premioX6 = () => {
+  saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value * 6);
+}
+let premioX8 = () => {
+  saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value * 8);
+}
+let premioX10 = () => {
+  saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value * 10);
+}
+let premioX12 = () => {
+  saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value * 12);
+}
+let premioX16 = () => {
+  saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value * 16);
+}
 
-    if (saldo.innerHTML <= 0){
-        saldo.innerHTML = 0;
+//FUNCION DE MEZCLAR ARRAY
+function mezclarArray(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+// GUARDAR JUGADAS EN EL LOCALSTORAGE
+const nroJugadas = jugadasGuardadas = localStorage.getItem("jugadasGuardadas") ?? jugadas++;
+if(!!jugadasGuardadas >= 0){
+ jugadas = jugadasGuardadas;
+}
+//CLICK AL BOTON JUGAR - BUCLE DE LA APP - CONTADOR DE CLICKS - SUMA Y RESTA DE PREMIOS - VALIDACION DE PATRONES GANADORES
+containerTirada.onsubmit = (e) => {
+  e.preventDefault();
+
+  //MEZCLA DEL ARRAY CONTENEDOR DE EMOJIS
+  mezclarArray(demoArray);
+  child1.innerHTML = '';
+  child2.innerHTML = '';
+  child3.innerHTML = '';
+  child4.innerHTML = '';
+  child5.innerHTML = '';
+  child6.innerHTML = '';
+  child7.innerHTML = '';
+  child8.innerHTML = '';
+  child9.innerHTML = '';
+
+  //contador de clicks-jugadas - validador de cantidad de jugadas para poder canjear los items por el saldo
+  let nroJugadas = jugadas++;
+  if(saldo.innerHTML <= 5){
+    nroJugadas = 0;
+  }
+  localStorage.setItem('jugadasGuardadas', nroJugadas); 
+  //BUCLE DEL JUEGO
+  while (saldo.innerHTML >= 0) {
+    //VALIDACION DE SALDO PARA JUGAR
+    if (saldo.innerHTML == 0) {
+      document.getElementById(`txt`).style.display = `block`;
+      break
+    }
+    if (saldo.innerHTML > 0) {
+      document.getElementById(`txt`).style.display = `none`;
     }
 
-}
+    //INPRESION DE CADA EMOJI EN SU CASILLA CORRESPONDIENTE
+    mezclarArray(demoArray)
+    let arrayUnido = demoArray.slice(0, 1);
+    let casilla1 = `${arrayUnido.join(" ")}`;
+    let arrayUnido2 = demoArray.slice(1, 2);
+    let casilla2 = `${arrayUnido2.join(" ")}`;
+    let arrayUnido3 = demoArray.slice(2, 3);
+    let casilla3 = `${arrayUnido3.join(" ")}`;
+    let arrayUnido4 = demoArray.slice(3, 4);
+    let casilla4 = `${arrayUnido4.join(" ")}`;
+    let arrayUnido5 = demoArray.slice(4, 5);
+    let casilla5 = `${arrayUnido5.join(" ")}`;
+    let arrayUnido6 = demoArray.slice(5, 6);
+    let casilla6 = `${arrayUnido6.join(" ")}`;
+    let arrayUnido7 = demoArray.slice(6, 7);
+    let casilla7 = `${arrayUnido7.join(" ")}`;
+    let arrayUnido8 = demoArray.slice(7, 8);
+    let casilla8 = `${arrayUnido8.join(" ")}`;
+    let arrayUnido9 = demoArray.slice(8, 9);
+    let casilla9 = `${arrayUnido9.join(" ")}`;
 
+    if (tirada.value <= Number(saldo.innerHTML)) {
+      jugar.disabled = true;
+      setTimeout(() => {
+        child1.innerHTML = casilla1;
+      }, 100);
+      setTimeout(() => {
+        child2.innerHTML = casilla2;
+      }, 300);
+      setTimeout(() => {
+        child3.innerHTML = casilla3;
+      }, 500);
+      setTimeout(() => {
+        child4.innerHTML = casilla4;
+      }, 700);
+      setTimeout(() => {
+        child5.innerHTML = casilla5;
+      }, 900);
+      setTimeout(() => {
+        child6.innerHTML = casilla6;
+      }, 1100);
+      setTimeout(() => {
+        child7.innerHTML = casilla7;
+      }, 1300);
+      setTimeout(() => {
+        child8.innerHTML = casilla8;
+      }, 1500);
+      setTimeout(() => {
+        child9.innerHTML = casilla9;
+      }, 1700);
+      setTimeout(() => {
+        jugar.disabled = false;
+      }, 1900);
 
-let premioX2 = () =>{
-    saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value*2);
+      //VALIDACION DE PATRONES GANADORES
 
-}
-
-let premioX4 = () =>{
-    saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value*4);
-
-}
-
-let premioX6 = () =>{
-    saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value*6);
-
-}
-
-let premioX8 = () =>{
-    saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value*8);
-
-}
-
-let premioX9 = () =>{
-    saldo.innerHTML = Number(saldo.innerHTML) + Number(tirada.value*9);
-
-}
-
-
-
-
-const containerTirada = document.getElementById('containerTirada');
-
-let demoArray = [`&#128520`,`&#128520`,`&#128520`,`&#128520`,`&#128520`,`&#128520`,`&#128520`,`&#128520`,`&#128520`,
-`&#128526`,`&#128526`,`&#128526`,`&#128526`,`&#128526`,`&#128526`,`&#128526`,`&#128526`,`&#128526`,
-`&#129297`,`&#129297`,`&#129297`,`&#129297`,`&#129297`,`&#129297`,`&#129297`,`&#129297`,`&#129297`];
-
-
-
-function mezclarArray(array){
-    array.sort(()=> Math.random() - 0.5);
-}
-
-
-
-
-
-
-containerTirada.onsubmit = (e) => {
-    e.preventDefault(); 
-    mezclarArray(demoArray);
-    child1.innerHTML= '';
-    child2.innerHTML= '';
-    child3.innerHTML= '';
-    child4.innerHTML= '';
-    child5.innerHTML= '';
-    child6.innerHTML= '';
-    child7.innerHTML= '';
-    child8.innerHTML= '';
-    child9.innerHTML= '';
-  while(saldo.innerHTML >= 0){ 
-        if(saldo.innerHTML == 0){
-          document.getElementById(`txt`).style.display= `block`;
-          document.getElementById(`salir`).style.margin= `18.6px 0px 0px 0px`;
+      //PATRON GANADOR COLUMNA Nro 1, Nro 2 y Nro 3 [|||]
+      if (casilla6 == `&#129297` && casilla6 == casilla5 && casilla6 == casilla4 && casilla6 == casilla9 && casilla6 == casilla8 && casilla6 == casilla7 && casilla6 == casilla1 && casilla6 == casilla2 && casilla6 == casilla3) {
+        document.getElementById(`popUp__boxX4`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX4`).style.display = `none`;
+        }, 2100);
+        premioX16()
         break
-        }
-        if(saldo.innerHTML > 0){
-          document.getElementById(`txt`).style.display= `none`;
-          document.getElementById(`salir`).style.margin= `40px 0px 0px 0px`;
-          
-        }
-          mezclarArray(demoArray)
-          
-            let arrayUnido = demoArray.slice(0,1);
-            let casilla1 = `${arrayUnido.join(" ")}`;
-            let arrayUnido2 = demoArray.slice(1,2);
-            let casilla2 = `${arrayUnido2.join(" ")}`;
-            let arrayUnido3 = demoArray.slice(2,3);
-            let casilla3 = `${arrayUnido3.join(" ")}`;
-            let arrayUnido4 = demoArray.slice(3,4);
-            let casilla4 = `${arrayUnido4.join(" ")}`;
-            let arrayUnido5 = demoArray.slice(4,5);
-            let casilla5 = `${arrayUnido5.join(" ")}`;
-            let arrayUnido6 = demoArray.slice(5,6);
-            let casilla6 = `${arrayUnido6.join(" ")}`;
-            let arrayUnido7 = demoArray.slice(6,7);
-            let casilla7 = `${arrayUnido7.join(" ")}`;
-            let arrayUnido8 = demoArray.slice(7,8);
-            let casilla8 = `${arrayUnido8.join(" ")}`;
-            let arrayUnido9 = demoArray.slice(8,9);
-            let casilla9 = `${arrayUnido9.join(" ")}`;
-        
-        
-        if(tirada.value <= Number(saldo.innerHTML)){
-          jugar.disabled = true;
-            setTimeout(() =>{
-              child1.innerHTML= casilla1;
-
-            },100);
-            setTimeout(() =>{
-              child2.innerHTML= casilla2;
-            },300);
-            setTimeout(() =>{
-              child3.innerHTML= casilla3;
-            },500);
-            setTimeout(() =>{
-              child4.innerHTML= casilla4;
-            },700);
-            setTimeout(() =>{
-              child5.innerHTML= casilla5;
-            },900);
-            setTimeout(() =>{
-              child6.innerHTML= casilla6;
-            },1100);
-            setTimeout(() =>{
-              child7.innerHTML= casilla7;
-            },1300);
-            setTimeout(() =>{
-              child8.innerHTML= casilla8;
-            },1500);
-            setTimeout(() =>{
-              child9.innerHTML= casilla9;
-            },1700);
-            setTimeout(() =>{
-              jugar.disabled = false;
-            },1900);
-          console.log(casilla1, casilla2, casilla3, casilla4, casilla5, casilla6, casilla7, casilla8, casilla9);
-
-           
-
-
-
-
-          //PATRON GANADOR COLUMNA Nro 1 y Nro3
-          if(casilla3 == `&#129297` && casilla3 == casilla2 && casilla3 == casilla1 && casilla3 == casilla9 && casilla3 == casilla8 && casilla3 == casilla7){
-            document.getElementById(`popUp__boxX4`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX4`).style.display= `none`;
-            }, 2500);
-            premioX4()
-            break     
-          }
-
-
-          //PATRON GANADOR COLUMNA Nro 1 y Nro 2
-           if(casilla3 == `&#129297` && casilla3 == casilla2 && casilla3 == casilla1 && casilla3 == casilla6 && casilla3 == casilla5 && casilla3 == casilla4){
-            document.getElementById(`popUp__boxX4`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX4`).style.display= `none`;
-            }, 2500);
-            premioX4()
-            break     
-          }
-
-
-          //PATRON GANADOR COLUMNA Nro 2 y Nro 3
-          if(casilla6 == `&#129297` && casilla6 == casilla5 && casilla6 == casilla4 && casilla6 == casilla9 && casilla6 == casilla8 && casilla6 == casilla7){
-            document.getElementById(`popUp__boxX4`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX4`).style.display= `none`;
-            }, 2500);
-            premioX4()
-            break   
-          }
-
-
-
-          //PATRON GANADOR FILA Nro 1 y 2
-          if(casilla3 == `&#129297` && casilla3 == casilla6 && casilla3 == casilla9 && casilla3 == casilla2 && casilla3 == casilla5 && casilla3 == casilla8){
-            document.getElementById(`popUp__boxX4`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX4`).style.display= `none`;
-            }, 2500);
-            premioX4()
-            break     
-          }
-
-
-          //PATRON GANADOR FILA Nro 1 y 3
-          if(casilla3 == `&#129297` && casilla3 == casilla6 && casilla3 == casilla9 && casilla3 == casilla1 && casilla3 == casilla4 && casilla3 == casilla7){
-            document.getElementById(`popUp__boxX4`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX4`).style.display= `none`;
-            }, 2500);
-            premioX4()
-            break
-                
-          }
-          //PATRON GANADOR FILA Nro 2 y 3
-          if(casilla2 == `&#129297` && casilla2== casilla5 && casilla2 == casilla8 && casilla2 == casilla1 && casilla2 == casilla4 && casilla2 == casilla7){
-            document.getElementById(`popUp__boxX4`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX4`).style.display= `none`;
-            }, 2500);
-            premioX4()
-            break 
-          }
-
-               //PATRON GANADOR FILA Nro 1
-               if(casilla3 == `&#129297` && casilla3 == casilla6 && casilla3 == casilla9){
-                document.getElementById(`popUp__boxX2`).style.display= `flex`;
-                setTimeout (() =>{
-                  document.getElementById(`popUp__boxX2`).style.display= `none`;
-                }, 2500);
-                premioX2()
-                    
-              }
-              //PATRON GANADOR FILA Nro 2
-              if(casilla2 == `&#129297` && casilla2== casilla5 && casilla2 == casilla8){
-                document.getElementById(`popUp__boxX2`).style.display= `flex`;
-                setTimeout (() =>{
-                  document.getElementById(`popUp__boxX2`).style.display= `none`;
-                }, 2500);
-                premioX2()
-              }
-              //PATRON GANADOR FILA Nro3 
-              if(casilla1 == `&#129297` && casilla1 == casilla4 && casilla1 == casilla7){
-                document.getElementById(`popUp__boxX2`).style.display= `flex`;
-                setTimeout (() =>{
-                  document.getElementById(`popUp__boxX2`).style.display= `none`;
-                }, 2500);
-                premioX2()    
-              }
-
-
-            //PATRON GANADOR COLUMNA Nro 1
-           if(casilla3 == `&#129297` && casilla3 == casilla2 && casilla3 == casilla1){
-            document.getElementById(`popUp__boxX2`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX2`).style.display= `none`;
-            }, 2500);
-            premioX2()  
-          }
-         
-          //PATRON GANADOR COLUMNA Nro 2
-          if(casilla6 == `&#129297` && casilla6 == casilla5 && casilla6 == casilla4){
-            document.getElementById(`popUp__boxX2`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX2`).style.display= `none`;
-            }, 2500);
-            premioX2()  
-          }
-          //PATRON GANADOR COLUMNA Nro3 
-          if(casilla9 == `&#129297` && casilla9 == casilla8 && casilla9 == casilla7){
-            document.getElementById(`popUp__boxX2`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX2`).style.display= `none`;
-            }, 2500);
-            premioX2()     
-          }
-          //PATRON GANADOR DOBLE DIAGONAL
-          if(casilla3 == `&#129297` && casilla3 == casilla5 && casilla3 == casilla7 && casilla3 == casilla1 && casilla3 == casilla9){
-            document.getElementById(`popUp__boxX4`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX4`).style.display= `none`;
-            }, 2500);
-            premioX4()
-            break    
-          }
-          //PATRON GANADOR DIAGONAL1
-          if(casilla3 == `&#129297` && casilla3 == casilla5 && casilla3 == casilla7){
-            document.getElementById(`popUp__boxX2`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX2`).style.display= `none`;
-            }, 2500);
-            premioX2()
-            break    
-          }
-          //PATRON GANADOR DIAGONAL 2
-          if(casilla1 == `&#129297` && casilla1 == casilla5 && casilla1 == casilla9){
-            document.getElementById(`popUp__boxX2`).style.display= `flex`;
-            setTimeout (() =>{
-              document.getElementById(`popUp__boxX2`).style.display= `none`;
-            }, 2500);
-            premioX2()
-            break     
-          }
-          else{
-          restarSaldo()
-          break
-          } 
-        }
-      else{
-        document.getElementById(`txt`).style.display= `block`;
-        document.getElementById(`salir`).style.margin= `18.6px 0px 0px 0px`; 
-        
+      }
+      //PATRON GANADOR COLUMNA Nro 1 y Nro3  [| |]
+      if (casilla3 == `&#129297` && casilla3 == casilla2 && casilla3 == casilla1 && casilla3 == casilla9 && casilla3 == casilla8 && casilla3 == casilla7) {
+        document.getElementById(`popUp__boxX4`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX4`).style.display = `none`;
+        }, 2100);
+        premioX4()
+        break
+      }
+      //PATRON GANADOR COLUMNA Nro 1 y Nro 2 [|| ]
+      if (casilla3 == `&#129297` && casilla3 == casilla2 && casilla3 == casilla1 && casilla3 == casilla6 && casilla3 == casilla5 && casilla3 == casilla4) {
+        document.getElementById(`popUp__boxX4`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX4`).style.display = `none`;
+        }, 2100);
+        premioX4()
+        break
+      }
+      //PATRON GANADOR COLUMNA Nro 2 y Nro 3 [ ||]
+      if (casilla6 == `&#129297` && casilla6 == casilla5 && casilla6 == casilla4 && casilla6 == casilla9 && casilla6 == casilla8 && casilla6 == casilla7) {
+        document.getElementById(`popUp__boxX4`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX4`).style.display = `none`;
+        }, 2100);
+        premioX4()
+        break
+      }
+      //PATRON GANADOR FILA Nro 1 y 2
+      if (casilla3 == `&#129297` && casilla3 == casilla6 && casilla3 == casilla9 && casilla3 == casilla2 && casilla3 == casilla5 && casilla3 == casilla8) {
+        document.getElementById(`popUp__boxX4`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX4`).style.display = `none`;
+        }, 2100);
+        premioX4()
+        break
+      }
+      //PATRON GANADOR FILA Nro 1 y 3
+      if (casilla3 == `&#129297` && casilla3 == casilla6 && casilla3 == casilla9 && casilla3 == casilla1 && casilla3 == casilla4 && casilla3 == casilla7) {
+        document.getElementById(`popUp__boxX4`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX4`).style.display = `none`;
+        }, 2100);
+        premioX4()
+        break
+      }
+      //PATRON GANADOR FILA Nro 2 y 3
+      if (casilla2 == `&#129297` && casilla2 == casilla5 && casilla2 == casilla8 && casilla2 == casilla1 && casilla2 == casilla4 && casilla2 == casilla7) {
+        document.getElementById(`popUp__boxX4`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX4`).style.display = `none`;
+        }, 2100);
+        premioX4()
+        break
+      }
+      //PATRON GANADOR FILA Nro 1
+      if (casilla3 == `&#129297` && casilla3 == casilla6 && casilla3 == casilla9) {
+        document.getElementById(`popUp__boxX2`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX2`).style.display = `none`;
+        }, 2100);
+        premioX2()
+        break
+      }
+      //PATRON GANADOR FILA Nro 2
+      if (casilla2 == `&#129297` && casilla2 == casilla5 && casilla2 == casilla8) {
+        document.getElementById(`popUp__boxX2`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX2`).style.display = `none`;
+        }, 2100);
+        premioX2()
+        break
+      }
+      //PATRON GANADOR FILA Nro3 
+      if (casilla1 == `&#129297` && casilla1 == casilla4 && casilla1 == casilla7) {
+        document.getElementById(`popUp__boxX2`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX2`).style.display = `none`;
+        }, 2100);
+        premioX2()
+        break
+      }
+      //PATRON GANADOR COLUMNA Nro 1
+      if (casilla3 == `&#129297` && casilla3 == casilla2 && casilla3 == casilla1) {
+        document.getElementById(`popUp__boxX2`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX2`).style.display = `none`;
+        }, 2100);
+        premioX2()
+        break
+      }
+      //PATRON GANADOR COLUMNA Nro 2
+      if (casilla6 == `&#129297` && casilla6 == casilla5 && casilla6 == casilla4) {
+        document.getElementById(`popUp__boxX2`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX2`).style.display = `none`;
+        }, 2100);
+        premioX2()
+        break
+      }
+      //PATRON GANADOR COLUMNA Nro3 
+      if (casilla9 == `&#129297` && casilla9 == casilla8 && casilla9 == casilla7) {
+        document.getElementById(`popUp__boxX2`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX2`).style.display = `none`;
+        }, 2100);
+        premioX2()
+        break
+      }
+      //PATRON GANADOR DOBLE DIAGONAL
+      if (casilla3 == `&#129297` && casilla3 == casilla5 && casilla3 == casilla7 && casilla3 == casilla1 && casilla3 == casilla9) {
+        document.getElementById(`popUp__boxX4`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX4`).style.display = `none`;
+        }, 2100);
+        premioX4()
+        break
+      }
+      //PATRON GANADOR DIAGONAL1
+      if (casilla3 == `&#129297` && casilla3 == casilla5 && casilla3 == casilla7) {
+        document.getElementById(`popUp__boxX2`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX2`).style.display = `none`;
+        }, 2100);
+        premioX2()
+        break
+      }
+      //PATRON GANADOR DIAGONAL 2
+      if (casilla1 == `&#129297` && casilla1 == casilla5 && casilla1 == casilla9) {
+        document.getElementById(`popUp__boxX2`).style.display = `flex`;
+        setTimeout(() => {
+          document.getElementById(`popUp__boxX2`).style.display = `none`;
+        }, 2100);
+        premioX2()
+        break
+      }
+      //VALIDACION DE PATRONES PERDEDORES
+      else {
+        restarSaldo()
         break
       }
     }
-    
-   
-    
-
-
-    localStorage.setItem('saldoGuardado', saldo.innerHTML);
-    sessionStorage.setItem('saldoSession', saldo.innerHTML);
-
-} 
-
-
-salir.onclick = () => {
-  modal2.style.display = 'flex';
-  
-};
-
-ok.onclick = () => {
-  modal2.style.display = 'none';
-  
-  
-};
-
-
+    //VALIDACION DE SALDO AL JUGAR
+    else {
+      document.getElementById(`txt`).style.display = `block`;
+      break
+    }
+  }
+  //GUARDADO Y ACTUALIZACION DEL SALDO EN TIEMPO REAL
+  localStorage.setItem('saldoGuardado', saldo.innerHTML);
+  sessionStorage.setItem('saldoSession', saldo.innerHTML); 
+}
 //JSON - FETCH - PREMIOS
-const modal3 = document.getElementById('modal3');
-const btnCanjear = document.querySelector('#btnCanjear')
-const btnCerrarCanjear = document.querySelector('#btnCerrarCanjear')
 
-const skins = document.getElementById('skins');
+//constructor de itemInventario
+class itemInventario{
+  constructor(img, nombre, price,){
+      this.img = img;
+      this.nombre = nombre;
+      this.price = price;
+      }
+    }
 
-
-
-  btnCanjear.onclick = () => {
-    modal3.style.display = 'flex';
-    fetch('./premios.json')
+//BOTON QUE ABRE EL APARTADO "CANJEAR" y HACE UN FETCH DE premios.json - Traer las skins o items del json al html
+btnCanjear.onclick = (e) => {
+  modalCanjear.style.display = 'flex';
+  fetch('./premios.json')
     .then(res => res.json())
     .then(premiosResults = (premios) => {
-    for(const PREMIOS of premios){
-        const {img, price, name} = PREMIOS;
+      for (const item of premios) {
+        const { img, price, nombre } = item;
         const card = document.createElement('div');
+        const mandarInventario = document.createElement('button');
+        mandarInventario.className = `botonCanjear`;
+        mandarInventario.innerHTML =`Canjear`;
         card.className = 'card';
-        card.innerHTML = 
-        `<img src="${img}" alt=""></img>
-        <p class="nombreSkin">${name}</p>
-        <p class="precioSkin">$${price}</p>
-        <button type="button" class="botonCanjear" id="ok">Canjear</button>`;
-        skins.append(card);
-    }
+        card.innerHTML =
+          `<img src="${img}" alt=""></img>
+        <p class="nombreSkin">${nombre}</p>
+        <p class="precioSkin">$${price}</p>`
+        card.append(mandarInventario);
+        skins.append(card); 
+        //VALIDACION DE JUGADAS (PARA QUE NO DEJE CANJEAR SI NO JUGASTE UN MINIMO DE 10 VECES)
+        if (jugadas <= 10) {
+          mandarInventario.disabled = true;
+          Swal.fire({
+            icon: 'error',
+            text: `Debes jugar minimo 10 veces`,
+          })
+        }
+        else {
+          mandarInventario.disabled = false;
+        }
+        //BOTON DE CANJEAR - AGREGA LOS ITEMS A UN ARRAY Y LOS MANDA AL LOCAL STORAGE - VALIDA SI TIENE EL SALDO SUFICIENTE PARA COMPRAR O NO
+        mandarInventario.onclick = () => {
+            if(price <= saldo.innerHTML){
+              const guardarInfo = () =>{
+                canasta.push(new itemInventario( img, nombre, price));
+                localStorage.setItem('canastaGuardada', JSON.stringify(canasta));;
+              }
+              guardarInfo()
+              card.style.display=`none`;
+              saldo.innerHTML = saldo.innerHTML - price;
+              localStorage.setItem('saldoGuardado', saldo.innerHTML);
+              sessionStorage.setItem('saldoSession', saldo.innerHTML);
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'canjeado',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+            else{
+              Swal.fire({
+                icon: 'error',
+                text: 'No tienes saldo suficiente!',
+              })
+            }
+          }     
+      }
     })
-    .catch();
-  };
+    .catch(error => {
+      skins.innerHTML = `<h1 class="chauTitle">No encontramos los items, recarga la pagina.</h1>`
+  }).finally() 
+};
 
-  btnCerrarCanjear.onclick = () => {
-    modal3.style.display = 'none';
-    skins.innerHTML="";
-    
-    
+// FUNCION QUE VERIFICA SI HAY ALGUN ITEM EN EL LOCAL STORAGE Y LO IMPRIME EN EL "INVENTARIO"
+const verificarStorage = () => {
+  if(!!canastaGuardada && canastaGuardada.length > 0){
+    for(const itemInventario of canastaGuardada){
+      const { img, price, nombre } = itemInventario;
+      const card = document.createElement('div');
+      const cardInventario = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `<img src="${img}">
+      <p>${nombre}</p>
+      <p>$${price}</p>`;
+      cardInventario.append(card);
+      inventario.appendChild(cardInventario);
+    };
   };
-  
-console.log(saldoGuardado)
+};
+verificarStorage()
 
-//INVENTARIO
+// BOTON QUE CIERRA EL APARTADO DE "CANJEAR"
+btnCerrarCanjear.onsubmit = () => {
+  modalCanjear.style.display = 'none';
+  skins.innerHTML = "";
+};
+
+//RECARGA DE SALDO
+btnRecarga.onclick = () => {
+  modalRecarga.style.display = 'flex';
+};
+cerrarRecarga.onclick = () => {
+  modalRecarga.style.display = 'none';
+};
+recargar.onclick = () => {
+  if (recarga.value < 1600) {
+    if (saldo.innerHTML == 0) {
+      saldo.innerHTML = Number(saldo.innerHTML) + Number(recarga.value);
+    }
+    else {
+      Swal.fire({
+        icon: 'error',
+        text: `Para recargar tu saldo debe ser 0, y es ${saldo.innerHTML}!`,
+      })
+    }
+  }
+  else {}
+  localStorage.setItem('saldoGuardado', saldo.innerHTML);
+  sessionStorage.setItem('saldoSession', saldo.innerHTML);
+};
+
+//BOTON QUE ABRE EL INVENTARIO
+btnInventario.onclick = () => {
+  modalInventario.style.display = 'flex';  
+};
+//BOTON QUE CIERRA EL INVENTARIO
+btnCerrarInventario.onclick = () => {
+  modalInventario.style.display = 'none';
+};
