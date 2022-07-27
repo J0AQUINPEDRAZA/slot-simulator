@@ -4,7 +4,10 @@
 }
 
 .header {
+    display: flex;
     flex-direction: column;
+    width: 100%;
+    height: auto;
 }
 
 .contentBox {
@@ -56,24 +59,26 @@
     font-size: 20px;
     border-bottom: 1px solid #fff;
 }
-.logOutContainer{
+
+.logOutContainer {
     width: 106.21px;
 }
 
 .btnLogOut:hover {
     text-shadow:
-    0 0 7px #fff,
-    0 0 10px #fff,
-    0 0 21px #fff,
-    0 0 42px #0fa,
-    0 0 82px #0fa,
-    0 0 92px #0fa,
-    0 0 102px #0fa,
-    0 0 151px #0fa;
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px #0fa,
+        0 0 82px #0fa,
+        0 0 92px #0fa,
+        0 0 102px #0fa,
+        0 0 151px #0fa;
     border-bottom: 1px solid #0fa;
 }
 
 .borde {
+    height: 0.1px;
     width: 100%;
     border-bottom: 2px solid #fff;
     box-shadow:
@@ -87,24 +92,18 @@
         0 0 151px #0fa;
 }
 
-
 h2 {
     font-size: 60px;
-
 }
 
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 330px;
-    height: 330px;
-    border: 2px solid #fff;
-    border-radius: 8px;
+    width: 300px;
+    height: 300px;
     margin: 10px 20px 20px 20px;
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-
-
+    border: 20px ridge #aeaeae;
 }
 
 .article {
@@ -114,15 +113,14 @@ h2 {
     justify-content: center;
     align-items: center;
     text-align: center;
-
 }
 
 .txt {
     color: red;
     font-weight: bold;
     display: none;
-    margin-right: 27px;
     z-index: 20;
+    justify-content: center;
 }
 
 .inputs {
@@ -140,13 +138,11 @@ h2 {
     margin-right: 20px;
 }
 
-
 .saldo {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-
 }
 
 .titleSaldo {
@@ -212,9 +208,6 @@ h2 {
     transition: box-shadow .2s ease-in-out, -webkit-box-shadow .2s ease-in-out;
 }
 
-
-
-
 .botonJugar {
     width: 80px;
     height: 40px;
@@ -231,7 +224,6 @@ h2 {
 .botonJugar:active {
     background-color: #036f4b;
 }
-
 
 .btnCanjear {
     width: 80px;
@@ -267,7 +259,6 @@ h2 {
     background-color: #036f4b;
 }
 
-
 .btnRecarga {
     width: 80px;
     height: 40px;
@@ -284,7 +275,6 @@ h2 {
 .btnRecarga:active {
     background-color: #036f4b;
 }
-
 
 .btnCerrarCanjear {
     width: 80px;
@@ -314,6 +304,7 @@ h2 {
 }
 
 .boxContainer {
+    z-index: -1;
     background:
         linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
         linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
@@ -327,19 +318,19 @@ h2 {
     justify-content: center;
     align-items: center;
     align-content: center;
-    width: 310px;
-    height: 310px;
-    border: 2px solid #fff;
+    width: 300px;
+    height: 300px;
     border-radius: 8px;
-
 }
 
 body {
+    height: 100%;
+    min-height: 721.60px;
     overflow: hidden;
-    z-index: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     background:
         linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
         linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
@@ -349,22 +340,38 @@ body {
         linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
     background-color: #131313;
     background-size: 20px 20px;
-    display: flex;
-    justify-content: center;
     opacity: 90%;
 }
 
-header {
-    display: flex;
+.footer {
     width: 100%;
-    height: auto;
-
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
 }
 
+.footerContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footerText {
+    font-size: 16px;
+    color: #fff;
+}
+
+.fa-brands {
+    font-size: 25px;
+}
+
+.fa-brands:hover {
+    color: #0fa
+}
 
 span {
     display: line;
-
 }
 
 input {
@@ -375,7 +382,7 @@ input {
     display: flex;
     position: absolute;
     width: 100%;
-    height: 180%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -384,14 +391,11 @@ input {
     background: rgba(119, 119, 119, 0.84);
 }
 
-
-
-
 .modal {
     display: none;
     position: absolute;
     width: 100%;
-    height: 180%;
+    height: 100%;
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -401,11 +405,9 @@ input {
     background: rgba(119, 119, 119, 0.84);
 }
 
-
 .bnvTitle {
     text-shadow: 0 0 7px #1d1d1d;
 }
-
 
 .chauTitle {
     text-shadow: 0 0 7px #1d1d1d;
@@ -421,7 +423,7 @@ input {
     text-align: center;
 }
 
-.cajaBtnSalir{
+.cajaBtnSalir {
     display: flex;
     width: 239px;
     justify-content: space-between;
@@ -429,6 +431,7 @@ input {
     flex-wrap: wrap;
     flex-direction: row;
 }
+
 .modalContainer {
     background: #fff;
     width: 500px;
@@ -451,6 +454,11 @@ input {
 
 .p {
     padding: 15px;
+}
+
+.labelsLogIn {
+    display: flex;
+    flex-direction: column;
 }
 
 .botonContinuar {
@@ -500,7 +508,6 @@ input {
     justify-content: space-around;
 }
 
-
 .modalContainer2 {
     height: 200px;
     display: flex;
@@ -517,12 +524,11 @@ input {
     justify-content: space-around;
 }
 
-
 .modal2 {
     display: none;
     position: absolute;
     width: 100%;
-    height: 180%;
+    height: 100%;
     z-index: 100;
     justify-content: center;
     align-items: center;
@@ -535,7 +541,7 @@ input {
     display: none;
     position: absolute;
     width: 100%;
-    height: 180%;
+    height: 100%;
     z-index: 100;
     justify-content: center;
     align-items: center;
@@ -544,12 +550,11 @@ input {
     background: rgba(119, 119, 119, 0.84);
 }
 
-
 .modalCanjear {
     display: none;
     position: absolute;
     width: 100%;
-    height: 180%;
+    height: 100%;
     z-index: 100;
     justify-content: center;
     align-items: center;
@@ -562,7 +567,7 @@ input {
     display: none;
     position: absolute;
     width: 100%;
-    height: 180%;
+    height: 100%;
     z-index: 100;
     justify-content: center;
     align-items: center;
@@ -575,7 +580,7 @@ input {
     display: none;
     position: absolute;
     width: 100%;
-    height: 180%;
+    height: 100%;
     z-index: 100;
     justify-content: center;
     align-items: center;
@@ -584,15 +589,13 @@ input {
     background: rgba(119, 119, 119, 0.84);
 }
 
-
-.recargaContainer{
+.recargaContainer {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    flex-direction: column;  
-    height: 200px;  
+    flex-direction: column;
+    height: 200px;
 }
-
 
 .premiosContainer {
     background: #fff;
@@ -618,7 +621,8 @@ input {
 
     visibility: visible;
 }
-.inventarioContainer{
+
+.inventarioContainer {
     background: #fff;
     max-width: 1133px;
     padding: 10px;
@@ -672,7 +676,6 @@ input {
     transition: 0.4s;
 }
 
-
 .inventario__canjear {
     display: flex;
     margin-right: 51px;
@@ -682,7 +685,8 @@ input {
     height: 200px;
 }
 
-.popUp__premioX2 {
+.popUp__premioX {
+    display: none;
     margin-top: -146px;
     margin-left: 836px;
     position: absolute;
@@ -694,22 +698,6 @@ input {
     align-items: center;
     align-content: center;
     justify-content: center;
-    display: none;
-}
-
-.popUp__premioX4 {
-    margin-top: -146px;
-    margin-left: 836px;
-    position: absolute;
-    z-index: 100;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    z-index: 1;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    display: none;
 }
 
 .premio {
@@ -728,9 +716,7 @@ input {
     visibility: visible;
 }
 
-
-
-.inpRecarga{
+.inpRecarga {
     height: 40px;
     width: 165px;
     padding-left: 5px;
@@ -739,7 +725,6 @@ input {
     border: 1px solid #000;
     border-radius: 4px;
 }
-
 
 @keyframes fadeIn {
     0% {
@@ -859,20 +844,20 @@ input {
 
 #formulario {
     display: flex;
+    height: 350px;
     flex-direction: column;
     align-content: center;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-
 }
 
 #contFormulario {
     display: flex;
-    display: flex;
+    height: 444px;
     flex-direction: column;
     align-content: center;
-    justify-content: center;
     align-items: center;
+    justify-content: space-around;
 }
 
 #nombre {
@@ -895,7 +880,6 @@ input {
     margin-top: 5px;
 }
 
-
 #edad {
     width: 350px;
     height: 30px;
@@ -911,12 +895,15 @@ input {
     height: 30px;
 }
 
-
 #contenido {
     color: #fff;
 }
 
 .emojiContainer {
+    width: 100%;
+    max-width: 269px;
+    height: 100%;
+    max-height: 270px;
     display: grid;
     flex-wrap: wrap;
     grid-template-columns: 1fr 1fr 1fr;
@@ -925,10 +912,7 @@ input {
     align-items: center;
 }
 
-
-
-
-.formRecarga{
+.formRecarga {
     width: 100%;
     display: flex;
     align-items: center;
@@ -936,28 +920,46 @@ input {
     justify-content: space-evenly;
 }
 
+.emoji3 {
+    font-size: 60px;
+    animation-name: slideDown3;
+    -webkit-animation-name: slideDown3;
 
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
 
+    animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
+}
 
-@keyframes slideDown {
+.emoji2 {
+    font-size: 60px;
+    animation-name: slideDown2;
+    -webkit-animation-name: slideDown2;
+
+    animation-duration: 0.2s;
+    -webkit-animation-duration: 0.2s;
+
+    animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
+}
+
+.emoji1 {
+    font-size: 60px;
+    animation-name: slideDown1;
+    -webkit-animation-name: slideDown1;
+
+    animation-duration: 0.1s;
+    -webkit-animation-duration: 0.1s;
+
+    animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
+}
+
+/*animacion emojis ultima fila*/
+@keyframes slideDown3 {
     0% {
-        transform: translateY(-100%);
-    }
-
-    50% {
-        transform: translateY(8%);
-    }
-
-    65% {
-        transform: translateY(-4%);
-    }
-
-    80% {
-        transform: translateY(4%);
-    }
-
-    95% {
-        transform: translateY(-2%);
+        transform: translateY(-260%);
     }
 
     100% {
@@ -965,25 +967,9 @@ input {
     }
 }
 
-@-webkit-keyframes slideDown {
+@-webkit-keyframes slideDown3 {
     0% {
-        -webkit-transform: translateY(-100%);
-    }
-
-    50% {
-        -webkit-transform: translateY(8%);
-    }
-
-    65% {
-        -webkit-transform: translateY(-4%);
-    }
-
-    80% {
-        -webkit-transform: translateY(4%);
-    }
-
-    95% {
-        -webkit-transform: translateY(-2%);
+        -webkit-transform: translateY(-260%);
     }
 
     100% {
@@ -991,7 +977,44 @@ input {
     }
 }
 
-;
+/*animacion emojis segunda fila*/
+@keyframes slideDown2 {
+    0% {
+        transform: translateY(-160%);
+    }
 
+    100% {
+        transform: translateY(0%);
+    }
+}
 
+@-webkit-keyframes slideDown2 {
+    0% {
+        -webkit-transform: translateY(-160%);
+    }
 
+    100% {
+        -webkit-transform: translateY(0%);
+    }
+}
+
+/*animacion emojis primer fila*/
+@keyframes slideDown1 {
+    0% {
+        transform: translateY(-70%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes slideDown1 {
+    0% {
+        -webkit-transform: translateY(-70%);
+    }
+
+    100% {
+        -webkit-transform: translateY(0%);
+    }
+}

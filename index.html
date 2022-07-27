@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,15 +41,15 @@
                         <div class="container">
                             <div class="boxContainer">
                                 <div class="emojiContainer" id="emojiContainer">
-                                    <h2 class="emoji1 emoji" id="casilla3"></h2>
-                                    <h2 class="emoji2 emoji" id="casilla6"></h2>
-                                    <h2 class="emoji3 emoji" id="casilla9"></h2>
-                                    <h2 class="emoji4 emoji" id="casilla2"></h2>
-                                    <h2 class="emoji5 emoji" id="casilla5"></h2>
-                                    <h2 class="emoji6 emoji" id="casilla8"></h2>
-                                    <h2 class="emoji7 emoji" id="casilla1"></h2>
-                                    <h2 class="emoji8 emoji" id="casilla4"></h2>
-                                    <h2 class="emoji9 emoji" id="casilla7"></h2>
+                                    <span class="emoji1" id="casilla3"></span>
+                                    <span class="emoji2" id="casilla6"></span>
+                                    <span class="emoji3" id="casilla9"></span>
+                                    <span class="emoji4" id="casilla2"></span>
+                                    <span class="emoji5" id="casilla5"></span>
+                                    <span class="emoji6" id="casilla8"></span>
+                                    <span class="emoji7" id="casilla1"></span>
+                                    <span class="emoji8" id="casilla4"></span>
+                                    <span class="emoji9" id="casilla7"></span>
                                 </div>
                             </div>
                         </div>
@@ -76,14 +76,39 @@
                             <p>⚠️Te has quedado sin SALDO⚠️</p>
                         </div>
                     </div>
-                    <div class="popUp__premioX2" id="popUp__boxX2">
+                    <div class="popUp__premioX" id="popUp__boxX2">
                         <p id="premio" class="premio">
                             X2
                         </p>
                     </div>
-                    <div class="popUp__premioX4" id="popUp__boxX4">
+                    <div class="popUp__premioX" id="popUp__boxX4">
                         <p id="premio" class="premio">
                             X4
+                        </p>
+                    </div>
+                    <div class="popUp__premioX" id="popUp__boxX6">
+                        <p id="premio" class="premio">
+                            X6
+                        </p>
+                    </div>
+                    <div class="popUp__premioX" id="popUp__boxX8">
+                        <p id="premio" class="premio">
+                            X8
+                        </p>
+                    </div>
+                    <div class="popUp__premioX" id="popUp__boxX10">
+                        <p id="premio" class="premio">
+                            X10
+                        </p>
+                    </div>
+                    <div class="popUp__premioX" id="popUp__boxX12">
+                        <p id="premio" class="premio">
+                            X12
+                        </p>
+                    </div>
+                    <div class="popUp__premioX" id="popUp__boxX16">
+                        <p id="premio" class="premio">
+                            X16
                         </p>
                     </div>
                 </div>
@@ -95,11 +120,19 @@
             <div id="contFormulario">
                 <h1>Ingresa tus datos para comenzar</h1>
                 <form id="formulario" action="">
-                    <input id="nombre" type="text" placeholder="Nombre" minlength="3" required maxlength="10" required
-                        pattern="[A-Z a-z]{1,15}" required>
-                    <input id="apellido" type="text" placeholder="Apellido" minlength="3" required maxlength="10"
-                        required pattern="[A-Z a-z]{1,15}" required>
-                    <input id="edad" type="text" placeholder="Año de nacimiento" required maxlength="4" minlength="4">
+                    <label for="" class="labelsLogIn">Ingresa tu nombre
+                        <input id="nombre" type="text" placeholder="Nombre" minlength="3" required maxlength="10"
+                            required pattern="[A-Z a-z]{1,15}" required>
+                        <small>No puedes ingresar caracteres especiales ni numeros.</small>
+                    </label>
+                    <label for="" class="labelsLogIn">Ingresa tu Apellido
+                        <input id="apellido" type="text" placeholder="Apellido" minlength="3" required maxlength="10"
+                            required pattern="[A-Z a-z]{1,15}" required>
+                    </label>
+                    <label for="" class="labelsLogIn">Ingresa tu año de nacimiento
+                        <input id="edad" type="text" placeholder="Año de nacimiento" required maxlength="4"
+                            minlength="4">
+                    </label>
                     <button value="enviar" type="submit" class="botonIngresar">Log in</button>
                 </form>
             </div>
@@ -127,11 +160,11 @@
     <div class="modal2" id="modal2">
         <div class="modalContainer modalContainer2">
             <h2 class="chauTitle">Estas seguro que quieres salir?</h2>
-            <p>Perderas todo tu saldo y inventario si decides salir</p>
+            <p>Perderas todo tu saldo e inventario si decides salir</p>
             <div class="cajaBtnSalir">
                 <form class="formSalir" action="">
                     <button id="salir" type="submit" class="botonSalir" title="SALIR" name="SALIR"
-                    placeholder="salir">SALIR</button>
+                        placeholder="salir">SALIR</button>
                 </form>
                 <button value="enviar" type="button" class="botonContinuar" id="no" title="VOLVER">VOLVER</button>
             </div>
@@ -160,8 +193,8 @@
                 <p class="chauTitle">Recargar saldo</p>
                 <p class="p">Recarga maxima de: 1500</p>
                 <form action="" class="formRecarga">
-                    <input class="inpRecarga" type="text" name="" id="recargaSaldo" placeholder="Ingrese el monto a recargar"
-                        maxlength="4">
+                    <input class="inpRecarga" type="text" name="" id="recargaSaldo"
+                        placeholder="Ingrese el monto a recargar" maxlength="4">
                     <button type="button" value="enviar" id="recargar" class="botonContinuar">Recargar</button>
                 </form>
                 <button value="enviar" type="button" class="btnCerrarCanjear" id="btnCerrarRecarga">Cerrar</button>
@@ -176,7 +209,16 @@
             <button value="enviar" type="button" class="btnCerrarCanjear" id="btnCerrarInventario">salir</button>
         </div>
     </div>
+    <footer class="footer">
+        <span class="borde"></span>
+        <div class="footerContainer">
+            <p class="footerText">&copy; Todos los derechos reservados</p>
+            <a href="https://github.com/J0AQUINPEDRAZA"><i class="fa-brands fa-github footerText"></i></a>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/acae1a4fd6.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
