@@ -718,18 +718,19 @@ btnCanjear.onclick = (e) => {
         card.append(mandarInventario);
         skins.append(card);
         //VALIDACION DE JUGADAS (PARA QUE NO DEJE CANJEAR SI NO JUGASTE UN MINIMO DE 10 VECES)
-        if (nroJugadas <= 10) {
-          mandarInventario.disabled = true;
-          Swal.fire({
-            icon: 'error',
-            text: `Debes jugar minimo 10 veces`,
-          })
-        }
-        else {
-          mandarInventario.disabled = false;
-        }
+        
         //BOTON DE CANJEAR - AGREGA LOS ITEMS A UN ARRAY Y LOS MANDA AL LOCAL STORAGE - VALIDA SI TIENE EL SALDO SUFICIENTE PARA COMPRAR O NO
         mandarInventario.onclick = () => {
+          if (nroJugadas <= 10) {
+            mandarInventario.disabled = true;
+            Swal.fire({
+              icon: 'error',
+              text: `Debes jugar minimo 10 veces`,
+            })
+          }
+          else {
+            mandarInventario.disabled = false;
+          }
           if (price <= saldo.innerHTML) {
             const guardarInfo = () => {
               canasta.push(new itemInventario(img, nombre, price));
