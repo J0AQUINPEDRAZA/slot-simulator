@@ -718,7 +718,7 @@ btnCanjear.onclick = (e) => {
         card.append(mandarInventario);
         skins.append(card);
         //VALIDACION DE JUGADAS (PARA QUE NO DEJE CANJEAR SI NO JUGASTE UN MINIMO DE 10 VECES)
-        if (jugadasGuardadas <= 10) {
+        if (nroJugadas <= 10) {
           mandarInventario.disabled = true;
           Swal.fire({
             icon: 'error',
