@@ -201,14 +201,14 @@ const premioX16 = () => {
 }
 
 //mostrar popup ganador y sumar el premio
-const popUpx2 = () =>{
+const popUpx2 = () => {
   document.getElementById(`popUp__boxX2`).style.display = `flex`;
   setTimeout(() => {
     document.getElementById(`popUp__boxX2`).style.display = `none`;
   }, 2100);
   premioX2()
 }
-const popUpx4 = () =>{
+const popUpx4 = () => {
   setTimeout(() => {
     document.getElementById(`popUp__boxX4`).style.display = `flex`;
   }, 400);
@@ -217,7 +217,7 @@ const popUpx4 = () =>{
   }, 2600);
   premioX4()
 }
-const popUpx6= () =>{
+const popUpx6 = () => {
   setTimeout(() => {
     document.getElementById(`popUp__boxX6`).style.display = `flex`;
   }, 400);
@@ -226,7 +226,7 @@ const popUpx6= () =>{
   }, 2600);
   premioX6()
 }
-const popUpx8 = () =>{
+const popUpx8 = () => {
   setTimeout(() => {
     document.getElementById(`popUp__boxX8`).style.display = `flex`;
   }, 400);
@@ -235,7 +235,7 @@ const popUpx8 = () =>{
   }, 2600);
   premioX8()
 }
-const popUpx10 = () =>{
+const popUpx10 = () => {
   setTimeout(() => {
     document.getElementById(`popUp__boxX10`).style.display = `flex`;
   }, 400);
@@ -244,7 +244,7 @@ const popUpx10 = () =>{
   }, 2600);
   premioX10()
 }
-const popUpx12 = () =>{
+const popUpx12 = () => {
   setTimeout(() => {
     document.getElementById(`popUp__boxX12`).style.display = `flex`;
   }, 400);
@@ -253,7 +253,7 @@ const popUpx12 = () =>{
   }, 2600);
   premioX12()
 }
-const popUpx16 = () =>{
+const popUpx16 = () => {
   setTimeout(() => {
     document.getElementById(`popUp__boxX16`).style.display = `flex`;
   }, 400);
@@ -309,9 +309,9 @@ containerTirada.onsubmit = (e) => {
   if (saldo.innerHTML > 50) {
     nroJugadas = jugadas++;
     localStorage.setItem('jugadasGuardadas', nroJugadas);
-  }else{
+  } else {
     nroJugadas = 0;
-    localStorage.setItem('jugadasGuardadas', nroJugadas); 
+    localStorage.setItem('jugadasGuardadas', nroJugadas);
   }
   //BUCLE DEL JUEGO
   while (saldo.innerHTML >= 0) {
@@ -464,8 +464,8 @@ containerTirada.onsubmit = (e) => {
         popUpx8();
         break
       }
-       //PATRON GANADOR X8 sin casillas 4 y 2
-       if (casilla8 == `&#129297` && casilla8 == casilla5 && casilla8 == casilla6 && casilla8 == casilla9 && casilla8 == casilla7 && casilla8 == casilla1 && casilla8 == casilla3) {
+      //PATRON GANADOR X8 sin casillas 4 y 2
+      if (casilla8 == `&#129297` && casilla8 == casilla5 && casilla8 == casilla6 && casilla8 == casilla9 && casilla8 == casilla7 && casilla8 == casilla1 && casilla8 == casilla3) {
         popUpx8();
         break
       }
@@ -496,7 +496,7 @@ containerTirada.onsubmit = (e) => {
         break
       }
       //PATRON GANADOR X6 COLUMNA Nro 2 y Nro 3 Y CASILLA 2
-      if (casilla6 == `&#129297` && casilla6 == casilla5 && casilla6 == casilla4 && casilla6 == casilla9 && casilla6 == casilla8 && casilla6 == casilla7  && casilla6 == casilla2) {
+      if (casilla6 == `&#129297` && casilla6 == casilla5 && casilla6 == casilla4 && casilla6 == casilla9 && casilla6 == casilla8 && casilla6 == casilla7 && casilla6 == casilla2) {
         popUpx6();
         break
       }
@@ -556,12 +556,12 @@ containerTirada.onsubmit = (e) => {
         break
       }
       //PATRON GANADOR FILA Nro3 Y DIAGONAL 1
-      if (casilla1 == `&#129297` && casilla1 == casilla4 && casilla1 == casilla7 && casilla1 == casilla5  && casilla1 == casilla9) {
+      if (casilla1 == `&#129297` && casilla1 == casilla4 && casilla1 == casilla7 && casilla1 == casilla5 && casilla1 == casilla9) {
         popUpx4();
         break
       }
       //PATRON GANADOR FILA Nro3 Y DIAGONAL 2
-      if (casilla1 == `&#129297` && casilla1 == casilla4 && casilla1 == casilla7 && casilla1 == casilla5  && casilla1 == casilla3) {
+      if (casilla1 == `&#129297` && casilla1 == casilla4 && casilla1 == casilla7 && casilla1 == casilla5 && casilla1 == casilla3) {
         popUpx4();
         break
       }
@@ -615,8 +615,8 @@ containerTirada.onsubmit = (e) => {
         popUpx4();
         break
       }
-       //PATRON GANADOR FILA Nro3 y columna 1
-       if (casilla1 == `&#129297` && casilla1 == casilla4 && casilla1 == casilla7 && casilla1 == casilla2 && casilla1 == casilla3) {
+      //PATRON GANADOR FILA Nro3 y columna 1
+      if (casilla1 == `&#129297` && casilla1 == casilla4 && casilla1 == casilla7 && casilla1 == casilla2 && casilla1 == casilla3) {
         popUpx4();
         break
       }
@@ -718,7 +718,7 @@ btnCanjear.onclick = (e) => {
         card.append(mandarInventario);
         skins.append(card);
         //VALIDACION DE JUGADAS (PARA QUE NO DEJE CANJEAR SI NO JUGASTE UN MINIMO DE 10 VECES)
-        
+
         //BOTON DE CANJEAR - AGREGA LOS ITEMS A UN ARRAY Y LOS MANDA AL LOCAL STORAGE - VALIDA SI TIENE EL SALDO SUFICIENTE PARA COMPRAR O NO
         mandarInventario.onclick = () => {
           if (nroJugadas <= 10) {
@@ -730,30 +730,30 @@ btnCanjear.onclick = (e) => {
           }
           else {
             mandarInventario.disabled = false;
-          }
-          if (price <= saldo.innerHTML) {
-            const guardarInfo = () => {
-              canasta.push(new itemInventario(img, nombre, price));
-              localStorage.setItem('canastaGuardada', JSON.stringify(canasta));;
+            if (price <= saldo.innerHTML) {
+              const guardarInfo = () => {
+                canasta.push(new itemInventario(img, nombre, price));
+                localStorage.setItem('canastaGuardada', JSON.stringify(canasta));;
+              }
+              guardarInfo()
+              card.style.display = `none`;
+              saldo.innerHTML = saldo.innerHTML - price;
+              localStorage.setItem('saldoGuardado', saldo.innerHTML);
+              sessionStorage.setItem('saldoSession', saldo.innerHTML);
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'canjeado',
+                showConfirmButton: false,
+                timer: 1500
+              })
             }
-            guardarInfo()
-            card.style.display = `none`;
-            saldo.innerHTML = saldo.innerHTML - price;
-            localStorage.setItem('saldoGuardado', saldo.innerHTML);
-            sessionStorage.setItem('saldoSession', saldo.innerHTML);
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'canjeado',
-              showConfirmButton: false,
-              timer: 1500
-            })
-          }
-          else {
-            Swal.fire({
-              icon: 'error',
-              text: 'No tienes saldo suficiente!',
-            })
+            else {
+              Swal.fire({
+                icon: 'error',
+                text: 'No tienes saldo suficiente!',
+              })
+            }
           }
         }
       }
