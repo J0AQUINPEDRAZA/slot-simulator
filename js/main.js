@@ -75,11 +75,19 @@ const ocultarFormulario = () => {
   modal.style.display = 'none';
   modal1.style.display = 'none';
   alertMenorEdad.style.display = 'none';
-  contenido.innerHTML =
-    `<div>NOMBRE: ${nombreUsuario}</div>
-  <div>APELLIDO: ${apellidoUsuario}</div>
-  <div>EDAD: ${edadUsuario}  años.</div>`;
+  imprimirDatosLogin()
 }
+//FUNCION PARA IMPRIMIR LOS DATOS DEL FORMULARIO DE LOGIN EN LA PANTALLA
+const imprimirDatosLogin = () => {
+  !!nombreUsuario == "" ? contenido.innerHTML = "" : contenido.innerHTML = `<div>NOMBRE: ${nombreUsuario}</div><div>APELLIDO: ${apellidoUsuario}</div><div>EDAD: ${edadUsuario}  años.</div>`;
+}
+
+//FUNSION PARA SABER SI HAY DATOS EN EL LOCALSTORAGE
+const localStorageVacio = () => {
+  !!nombreUsuario == "" ? modal1.style.display = 'flex' : modal1.style.display = 'none';
+  imprimirDatosLogin()
+}
+localStorageVacio()
 
 //EVENTO BOTON CONTINUAR DE LA VENTANA DE BIENVENIDA
 btnContinuar.onclick = (e) => {
@@ -95,7 +103,6 @@ formulario.addEventListener('submit', (e) => {
   nombreUsuario = nombre.value;
   apellidoUsuario = apellido.value;
   edadUsuario = YEAR - edad.value;
-
   //VALIDACION DE EDAD
   if (edadUsuario < mayorDeEdad) {
     alertMenorEdad.style.display = 'flex';
@@ -306,7 +313,7 @@ containerTirada.onsubmit = (e) => {
   borrarEmoji(child8);
   borrarEmoji(child9);
   //contador de clicks-jugadas - validador de cantidad de jugadas para poder canjear los items por el saldo
-  if (saldo.innerHTML > 50) {
+  if (saldo.innerHTML > 1) {
     nroJugadas = jugadas++;
     localStorage.setItem('jugadasGuardadas', nroJugadas);
   } else {
@@ -718,7 +725,6 @@ btnCanjear.onclick = (e) => {
         card.append(mandarInventario);
         skins.append(card);
         //VALIDACION DE JUGADAS (PARA QUE NO DEJE CANJEAR SI NO JUGASTE UN MINIMO DE 10 VECES)
-
         //BOTON DE CANJEAR - AGREGA LOS ITEMS A UN ARRAY Y LOS MANDA AL LOCAL STORAGE - VALIDA SI TIENE EL SALDO SUFICIENTE PARA COMPRAR O NO
         mandarInventario.onclick = () => {
           if (nroJugadas <= 10) {
@@ -745,7 +751,7 @@ btnCanjear.onclick = (e) => {
                 icon: 'success',
                 title: 'canjeado',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1300
               })
             }
             else {
@@ -799,15 +805,29 @@ recargar.onclick = () => {
   if (recarga.value <= 1500) {
     if (saldo.innerHTML == 0) {
       saldo.innerHTML = Number(saldo.innerHTML) + Number(recarga.value);
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: `Genial! has recargado ${recarga.value}`,
+        showConfirmButton: false,
+        timer: 1300
+      })
+      nroJugadas = 0;
+      localStorage.setItem('jugadasGuardadas', nroJugadas);
     }
     else {
       Swal.fire({
         icon: 'error',
         text: `Para recargar tu saldo debe ser 0, y es ${saldo.innerHTML}!`,
       })
-    }
+    };
   }
-  else { }
+  else {
+    Swal.fire({
+      icon: 'error',
+      text: `No puedes recargar ${recarga.value}`,
+    })
+  }
   localStorage.setItem('saldoGuardado', saldo.innerHTML);
   sessionStorage.setItem('saldoSession', saldo.innerHTML);
 };

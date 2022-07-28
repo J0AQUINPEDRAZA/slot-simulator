@@ -118,20 +118,21 @@
     <div class="modal" id="modal">
         <div class="modalContainer">
             <div id="contFormulario">
-                <h2>Ingresa tus datos para comenzar</h2>
+                <h2 class="bnvTitle">Ingresa tus datos para comenzar</h2>
                 <form id="formulario" action="">
                     <label for="" class="labelsLogIn">Ingresa tu nombre
-                        <input id="nombre" type="text" placeholder="Nombre" minlength="3" required maxlength="10"
+                        <input id="nombre" type="text" placeholder="Nombre" minlength="4" required maxlength="10"
                             required pattern="[A-Z a-z]{1,15}" required>
                         <small>No puedes ingresar caracteres especiales ni numeros.</small>
                     </label>
                     <label for="" class="labelsLogIn">Ingresa tu Apellido
-                        <input id="apellido" type="text" placeholder="Apellido" minlength="3" required maxlength="10"
+                        <input id="apellido" type="text" placeholder="Apellido" minlength="4" required maxlength="10"
                             required pattern="[A-Z a-z]{1,15}" required>
                     </label>
                     <label for="" class="labelsLogIn">Ingresa tu año de nacimiento
                         <input id="edad" type="text" placeholder="Año de nacimiento" required maxlength="4"
                             minlength="4">
+                            <small>Solo puedes ingresar numeros.</small>
                     </label>
                     <button value="enviar" type="submit" class="botonIngresar">Log in</button>
                 </form>
@@ -142,8 +143,8 @@
         <div class="modalContainer modalContainer1">
             <h2 class="bnvTitle">BIENVENIDO</h2>
             <h3 class="bnvTitle">Crazy emojis</h3>
-            <p class="p">Crazy emojis es un juego tipo slot o comunmente llamado tragamoneda, consiste en conseguir una
-                o mas filas columnas o diagonales con 3 emojis consecutivos de "dinero" 🤑, por cada fila columna o
+            <p class="p">Crazy emojis es un juego tipo slot o comunmente llamado tragamoneda, que consiste en conseguir una
+                o mas filas, columnas o diagonales con 3 emojis consecutivos de "dinero" 🤑, por cada fila, columna o
                 diagonal que cumpla esta condicion el usuario recibira una recompensa del doble del valor jugado (el
                 monto de la tirada). </p>
             <p class="p">El saldo ganado podrá ser canjeado en el apartado de "canjear" por items de Counter Strike
@@ -183,7 +184,7 @@
             <div class="skins" id="skins">
             </div>
             <form action="">
-                <input value="salir" type="submit" class="btnCerrarCanjear" id="btnCerrarCanjear"></input>
+                <button name="SALIR" type="submit" class="btnCerrarCanjear" id="btnCerrarCanjear">SALIR</button>
             </form>
         </div>
     </div>

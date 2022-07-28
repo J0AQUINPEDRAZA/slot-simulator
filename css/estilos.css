@@ -93,7 +93,7 @@
 }
 
 h2 {
-    font-size: 60px;
+    font-size: 50px;
 }
 
 .container {
@@ -379,11 +379,10 @@ input {
 }
 
 .modal1 {
-    display: flex;
+    display: none;
     position: absolute;
     width: 100%;
     height: 100%;
-    display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
@@ -397,7 +396,6 @@ input {
     width: 100%;
     height: 100%;
     z-index: 100;
-    display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
@@ -407,6 +405,7 @@ input {
 
 .bnvTitle {
     text-shadow: 0 0 7px #1d1d1d;
+    text-align: center;
 }
 
 .chauTitle {
